@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- AANPASSEN PER PAGINA -->
+    <title>Eindpunt: Teamlokaal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Animatie voor foute invoer */
+        @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
+
+        body { font-family: 'Poppins', sans-serif; background-color: #fdf2f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+
+        /* --- NIEUWE LAYOUT MET CSS GRID --- */
+        .card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            border-top: 5px solid #db2777;
+            /* Maak van de kaart een grid container */
+            display: grid;
+            /* Centreer de items in de grid cel */
+            place-items: center;
+        }
+
+        /* Zorg dat zowel het formulier als de letter in dezelfde grid cel komen (1e rij, 1e kolom) */
+        #password-form, #letterResult {
+            grid-area: 1 / 1;
+            width: 100%;
+            /* Vloeiende overgang voor opacity */
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+
+        /* --- STIJL VOOR DE INTERACTIEVE ELEMENTEN --- */
+        h1 { font-size: 2em; color: #831843; margin-bottom: 20px; }
+        #passwordInput { font-family: 'Poppins', sans-serif; width: 100%; padding: 12px; font-size: 1.1em; margin-top: 10px; border: 2px solid #f9a8d4; border-radius: 8px; box-sizing: border-box; text-align: center; }
+        #passwordInput.shake { animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both; }
+        #submitBtn { font-family: 'Poppins', sans-serif; background-color: #be185d; color: white; padding: 12px 25px; font-size: 1.2em; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px; transition: transform 0.2s, box-shadow 0.2s; }
+        #submitBtn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(190, 24, 93, 0.3); }
+        #errorMessage { color: #be123c; font-weight: 600; margin-top: 15px; height: 20px; }
+
+        /* --- STIJL VOOR DE LETTER --- */
+        #letterResult {
+            font-size: 20rem;
+            font-weight: 700;
+            color: #16a34a;
+            line-height: 1;
+        }
+        
+        /* Utility class om elementen te verbergen met een fade-out */
+        .is-hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none; /* Maakt het element niet-klikbaar */
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Module 1: Het Wachtwoord Formulier -->
+        <div id="password-form">
+            <h1>Geef het wachtwoord in</h1>
+            <input type="text" id="passwordInput" placeholder="Jullie antwoord...">
+            <p id="errorMessage"></p>
+            <button id="submitBtn">Onthul de Letter</button>
+        </div>
+
+        <!-- Module 2: De Letter (start verborgen) -->
+        <div id="letterResult" class="is-hidden">
+            <!-- AANPASSEN PER PAGINA -->
+            E
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATIE: AANPASSEN PER PAGINA ---
+        const correctPassword = "3100R531489";
+
+        // --- ALGEMENE CODE (VERBETERD) ---
+        const passwordInput = document.getElementById("passwordInput");
+        const submitBtn = document.getElementById("submitBtn");
+        const errorMessage = document.getElementById("errorMessage");
+        const letterResult = document.getElementById("letterResult");
+        const passwordForm = document.getElementById("password-form");
+
+        submitBtn.addEventListener("click", checkPassword);
+        passwordInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkPassword();
+            }
+        });
+
+        function checkPassword() {
+            errorMessage.textContent = "";
+            passwordInput.classList.remove("shake");
+
+            const userInput = passwordInput.value.trim().toUpperCase();
+
+            if (userInput === correctPassword) {
+                // Verberg het formulier en toon de letter met een fade
+                passwordForm.classList.add("is-hidden");
+                letterResult.classList.remove("is-hidden");
+            } else {
+                errorMessage.textContent = "Dat is niet correct. Probeer het opnieuw!";
+                passwordInput.classList.add("shake");
+                passwordInput.value = "";
+                // Zorgt dat de animatie opnieuw kan afspelen
+                setTimeout(() => passwordInput.classList.remove("shake"), 820);
+            }
+        }
+    </script>
+</body>
+</html>
