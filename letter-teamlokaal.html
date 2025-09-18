@@ -12,7 +12,15 @@
     /* Animatie voor foute invoer */
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
 
-    body { font-family: 'Poppins', sans-serif; background-color: #fdf2f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+    html {
+        box-sizing: border-box;
+        width: 100vw;
+        overflow-x: hidden;
+    }
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+    body { font-family: 'Poppins', sans-serif; background-color: #fdf2f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; width: 100vw; overflow-x: hidden; }
 
         /* --- NIEUWE LAYOUT MET CSS GRID --- */
         .card {
@@ -28,25 +36,41 @@
             display: grid;
             /* Centreer de items in de grid cel */
             place-items: center;
+            word-break: break-word;
         }
 
         /* Responsive styling for mobile devices */
         @media (max-width: 600px) {
             .card {
-                padding: 18px 6px;
-                max-width: 98vw;
+                padding: 12vw 2vw 8vw 2vw;
+                max-width: 100vw;
                 border-radius: 8px;
+                min-width: 0;
             }
             h1 {
-                font-size: 1.2em;
-                margin-bottom: 14px;
+                font-size: 1.1em;
+                margin-bottom: 10px;
+                word-break: break-word;
             }
-            #passwordInput, #submitBtn {
+            #passwordInput {
                 font-size: 1em;
                 padding: 10px;
+                min-width: 0;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            #submitBtn {
+                font-size: 1em;
+                padding: 10px;
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+                box-sizing: border-box;
             }
             #letterResult {
-                font-size: 6rem;
+                font-size: 4.5rem;
+                word-break: break-word;
             }
         }
 
@@ -59,12 +83,12 @@
         }
 
         /* --- STIJL VOOR DE INTERACTIEVE ELEMENTEN --- */
-        h1 { font-size: 2em; color: #831843; margin-bottom: 20px; }
-        #passwordInput { font-family: 'Poppins', sans-serif; width: 100%; padding: 12px; font-size: 1.1em; margin-top: 10px; border: 2px solid #f9a8d4; border-radius: 8px; box-sizing: border-box; text-align: center; }
-        #passwordInput.shake { animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both; }
-        #submitBtn { font-family: 'Poppins', sans-serif; background-color: #be185d; color: white; padding: 12px 25px; font-size: 1.2em; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px; transition: transform 0.2s, box-shadow 0.2s; }
-        #submitBtn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(190, 24, 93, 0.3); }
-        #errorMessage { color: #be123c; font-weight: 600; margin-top: 15px; height: 20px; }
+    h1 { font-size: 2em; color: #831843; margin-bottom: 20px; word-break: break-word; }
+    #passwordInput { font-family: 'Poppins', sans-serif; width: 100%; padding: 12px; font-size: 1.1em; margin-top: 10px; border: 2px solid #f9a8d4; border-radius: 8px; box-sizing: border-box; text-align: center; min-width: 0; max-width: 100%; }
+    #passwordInput.shake { animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both; }
+    #submitBtn { font-family: 'Poppins', sans-serif; background-color: #be185d; color: white; padding: 12px 25px; font-size: 1.2em; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px; transition: transform 0.2s, box-shadow 0.2s; min-width: 0; max-width: 100%; box-sizing: border-box; }
+    #submitBtn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(190, 24, 93, 0.3); }
+    #errorMessage { color: #be123c; font-weight: 600; margin-top: 15px; height: 20px; word-break: break-word; }
 
         /* --- STIJL VOOR DE LETTER --- */
         #letterResult {
@@ -72,6 +96,9 @@
             font-weight: 700;
             color: #16a34a;
             line-height: 1;
+            word-break: break-word;
+            max-width: 100vw;
+            overflow-wrap: break-word;
         }
         
         /* Utility class om elementen te verbergen met een fade-out */
