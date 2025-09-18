@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Animatie voor foute invoer */
+    /* Animatie voor foute invoer */
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
 
-        body { font-family: 'Poppins', sans-serif; background-color: #fdf2f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background-color: #fdf2f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
 
         /* --- NIEUWE LAYOUT MET CSS GRID --- */
         .card {
@@ -28,6 +28,26 @@
             display: grid;
             /* Centreer de items in de grid cel */
             place-items: center;
+        }
+
+        /* Responsive styling for mobile devices */
+        @media (max-width: 600px) {
+            .card {
+                padding: 18px 6px;
+                max-width: 98vw;
+                border-radius: 8px;
+            }
+            h1 {
+                font-size: 1.2em;
+                margin-bottom: 14px;
+            }
+            #passwordInput, #submitBtn {
+                font-size: 1em;
+                padding: 10px;
+            }
+            #letterResult {
+                font-size: 6rem;
+            }
         }
 
         /* Zorg dat zowel het formulier als de letter in dezelfde grid cel komen (1e rij, 1e kolom) */
