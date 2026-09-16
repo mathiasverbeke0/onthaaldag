@@ -102,7 +102,7 @@
             errorMessage.textContent = "";
             passwordInput.classList.remove("shake");
 
-            const userInput = passwordInput.value.trim().toUpperCase();
+            const userInput = passwordInput.value.trim().toUpperCase().replace(",", ".");
 
             if (userInput === correctPassword) {
                 // Verberg het formulier en toon de letter met een fade
